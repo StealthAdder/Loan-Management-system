@@ -7,6 +7,7 @@ if(!$con){
 }
 if(isset($_POST['submit']))
 {
+
 $name=$_POST["nme"];
 $customer_id=$_POST["customerid"];
 $loan_type=$_POST["loantype"];
