@@ -205,7 +205,7 @@ body {
   <!-- create session -->
   <?php
     if(isset($_SESSION['usrname'])) {
-      echo '<a href=" ./includes/logout.php" class="right">LOGOUT</a>';
+      echo '<a href="/Loan-Management-system/includes/logout.php" class="right">LOGOUT</a>';
       echo '<a href="#" class="right">'.$_SESSION['name'].'</a>';
     }
     else {
