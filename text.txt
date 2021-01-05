@@ -1,2 +1,15 @@
 Re create the loan_details table,
 
+<?php
+    $i=0;
+    ?>
+    <tr>
+        <td><?php echo $row["loan_id"]; ?></td>
+        <td><?php echo $row["customer_id"]; ?></td>
+        <td><?php echo $row["customer_name"]; ?></td>
+        <td><?php echo $row["loan_type"]; ?></td>
+        <td><?php echo $row["loan_amount"]; ?></td>
+        <td><?php echo $row["loan_tenure"]; ?></td>
+        <td><?php echo $row["interest_rate"]; ?></td>
+    </tr>
+    <?php $i++;?>
