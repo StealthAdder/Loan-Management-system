@@ -125,8 +125,8 @@ body {
 </div>
 
 <div class="navbar">
-  <a href="http:myaccount.php">MY ACCOUNT</a>
-  <a href="http:loan.php">LOAN</a>
+  <a href="myaccount.php">MY ACCOUNT</a>
+  <a href="./loan/loan.php">LOAN</a>
   <a href="http:emi.php">EMI</a>
   <a href="http:loan_payment.php">LOAN PAYMENT</a>
   <!-- create session -->

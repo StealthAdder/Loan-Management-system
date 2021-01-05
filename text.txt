@@ -1,0 +1,2 @@
+Re create the loan_details table,
+

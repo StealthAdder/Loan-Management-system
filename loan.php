@@ -1,34 +1,3 @@
-<?php
-
-$con=mysqli_connect('localhost','root','','loan management system');
-if(!$con){
-    echo'Connection error'. mysqli_connect_errno();
-
-}
-if(isset($_POST['submit']))
-{
-
-$name=$_POST["nme"];
-$customer_id=$_POST["customerid"];
-$loan_type=$_POST["loantype"];
-$loan_amount=$_POST["loanamount"];
-$loan_tenure=$_POST["loantenure"];
-$interest_rate=$_POST["interestrate"];
-
-
-if(mysqli_query($con, "INSERT INTO loan_details(name,customer_id,loan_type,loan_amount,loan_tenure,interest_rate)
- VALUES('$name','$customer_id','$loan_type','$loan_amount','$loan_tenure','$interest_rate')")){
-   echo 'LOAN APPLIED ';
-}
- else{
-   echo "error" . mysqli_error($con);
-}
-
-}
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -233,30 +202,45 @@ button:hover {
 <button class="open-button" onclick="openForm()">APPLY FOR LOAN</button>
 
 <div class="form-popup" id="myForm">
-  <form action="loan.php" class="form-container"  method="post">
+  <form action="test.php" class="form-container"  method="post">
     <h1> ENTER LOAN DETAILS :</h1>
-
-    
-
-    <label for="name"><b>NAME</b></label>
-    <input type="text" maxlength="20" placeholder="Enter name" name="nme" required>
-    <br>
-    <label for="customer id"><b>CUSTOMER ID</b></label>
-    <input type="text"  maxlength="20" placeholder="Enter customer id" name="customerid" required>
-    <br>
      <label for="loan type"><b>LOAN TYPE</b></label>
-     <input type="text"  maxlength = "10" placeholder="Enter loan type" name="loantype" required>
+    <select id="loantype" name="loantype">
+      <option value="#" disabled selected>Choose</option>
+      <option value="home_loan">Home Loan</option>
+      <option value="personal_loan">Personal Loan</option>
+      <option value="vehicle_loan">Vehicle Loan</option>
+    </select>
      <br>
+     
      <label for="loan amount"><b>LOAN AMOUNT</b></label>
      <input type="number" maxlength = "10" placeholder="Enter loan amount" name="loanamount" required>
      <br>
+     
      <label for="loan tenure"><b>LOAN TENURE</b></label>
-     <input type="months" maxlength = "50" placeholder="Enter loan tenure" name="loantenure" required>
+     <!-- <input type="months" maxlength = "50" placeholder="Enter loan tenure" name="loantenure" required> -->
+     <select id="loantenure" name="loantenure">
+      <option value="#" disabled selected>Select</option>
+      <option value="24">24 Months</option>
+      <option value="60">60 Months</option>
+      <option value="84">84 Months</option>
+    </select>
      <br>
+     
      <label for="interest rate"><b>INTEREST RATE</b></label>
-     <input type="text" maxlength = "10" placeholder="Enter interest rate" name="interestrate" required>
+     <select id="interestrate" name="interestrate">
+      <option value="#" disabled selected>Select</option>
+      <option value="6%">6%</option>
+      <option value="7%">7%</option>
+      <option value="8%">8%</option>
+      <option value="9%">9%</option>
+      <option value="10%">10%</option>
+      <option value="11%">11%</option>
+      <option value="12%">12%</option>
+    </select>
      <br>
-    <br>
+     <br>
+     
      <button type="submit" class="submitbtn" name="submit">SUBMIT</button>
 <button type="reset" class="resetbtn">RESET</button>
     <button type="button" class="btn cancel" onclick="closeForm()">CLOSE</button>

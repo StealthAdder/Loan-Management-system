@@ -83,13 +83,19 @@ tr:nth-child(odd) {
 <div class="navbar">
     <center><button onclick="window.location.href='http:user_home.php';" class="backbtn">
         BACK
-        </button>		</center>
+        </button></center>
       </div>
     </body>
     <body>
     <?php
 
-      $con=mysqli_connect('localhost','root','','loan management system');
+  // $con=mysqli_connect('localhost','root','','loan management system');
+  include ("/var/www/html/access/access_loan.php");
+  // //connection
+  $db = "loan_management_system";
+  $con = mysqli_connect($host, $user, $passwd, $db);
+  unset($hostname, $username, $passwd, $db);
+
       if(!$con){
           echo'Connection error'. mysqli_connect_errno();
       }
@@ -103,7 +109,7 @@ tr:nth-child(odd) {
       // connection verify
       if(!mysqli_stmt_prepare($stmt, $sql)) {
         // checking
-      header("Location: ../user_home.php?error=sqlerrorstmt");
+      header("Location: ./user_home.php?error=sqlerrorstmt");
       }
       else {
         mysqli_stmt_bind_param($stmt, "s", $usrname);
@@ -127,7 +133,7 @@ tr:nth-child(odd) {
       </tr>
     <?php
     $i=0;
-   
+    session_start();
     ?>
     <tr>
         <td><?php echo $row["name"]; ?></td>
@@ -140,12 +146,14 @@ tr:nth-child(odd) {
         <td><?php echo $row["email"]; ?></td>
     </tr>
     <?php
+    
+
     $i++;
     
     ?>
     </table>
      <?php
-    
+    echo "Customer_id: ".$_SESSION['customer_id'];
     
     ?>
      </body>
