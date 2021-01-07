@@ -1,3 +1,10 @@
+<?php 
+session_start();
+if (!isset($_SESSION['customer_id'])) {
+  header("Location: /Loan-Management-system/Login.php");
+  exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

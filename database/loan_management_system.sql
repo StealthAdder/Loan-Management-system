@@ -92,22 +92,22 @@ CREATE TABLE `loan payment` (
 --
 
 CREATE TABLE `loan_details` (
-  `loan_id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(20) NOT NULL,
-  `customer_id` int(30) UNSIGNED NOT NULL,
-  `loan_type` varchar(20) NOT NULL,
-  `loan_amount` varchar(10) NOT NULL,
-  `loan_tenure` varchar(10) NOT NULL,
-  `interest_rate` varchar(10) NOT NULL
+  `loan_id` INT(15) NOT NULL PRIMARY KEY,
+  `customer_id` INT(15) NOT NULL,
+  `customer_name` VARCHAR(30) NOT NULL,
+  `loan_type` VARCHAR(30) NOT NULL,
+  `loan_amount` VARCHAR(30) NOT NULL,
+  `loan_tenure` VARCHAR(30) NOT NULL,
+  `interest_rate` VARCHAR(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `loan_details`
 --
 
-INSERT INTO `loan_details` (`loan_id`, `name`, `customer_id`, `loan_type`, `loan_amount`, `loan_tenure`, `interest_rate`) VALUES
-(3, 'kop', 1234, 'dsdfdd', '12344', '12', '10'),
-(8, 'awadhesh', 1235, 'sasasajkjk', '123434', '12', '10');
+-- INSERT INTO `loan_details` (`customer_id`, `customer_name`, `loan_type`, `loan_amount`, `loan_tenure`, `interest_rate`) VALUES 
+-- (3, 'kop', 1234, 'dsdfdd', '12344', '12', '10'),
+-- (8, 'awadhesh', 1235, 'sasasajkjk', '123434', '12', '10');
 
 -- --------------------------------------------------------
 
@@ -184,8 +184,7 @@ ALTER TABLE `emi`
 -- AUTO_INCREMENT for table `loan_details`
 --
 ALTER TABLE `loan_details`
-  MODIFY `loan_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
+MODIFY `loan_id` INT(30) AUTO_INCREMENT, AUTO_INCREMENT=13524;
 --
 -- Constraints for dumped tables
 --
