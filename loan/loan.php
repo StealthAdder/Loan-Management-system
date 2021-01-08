@@ -38,26 +38,11 @@ if (!isset($_SESSION['customer_id'])) {
      <!-- <input type="months" maxlength = "50" placeholder="Enter loan tenure" name="loantenure" required> -->
      <select id="loantenure" name="loantenure">
       <option value="#" disabled selected>Select</option>
-      <option value="24 Months">24 Months</option>
-      <option value="60 Months">60 Months</option>
-      <option value="84 Months">84 Months</option>
+      <option value="24">24 Months</option>
+      <option value="60">60 Months</option>
+      <option value="84">84 Months</option>
     </select>
      <br>
-     
-     <label for="interest rate"><b>INTEREST RATE</b></label>
-     <select id="interestrate" name="interestrate">
-      <option value="#" disabled selected>Select</option>
-      <option value="6%">6%</option>
-      <option value="7%">7%</option>
-      <option value="8%">8%</option>
-      <option value="9%">9%</option>
-      <option value="10%">10%</option>
-      <option value="11%">11%</option>
-      <option value="12%">12%</option>
-    </select>
-     <br>
-     <br>
-     
      <button type="submit" class="submitbtn" name="submit">SUBMIT</button>
 <button type="reset" class="resetbtn">RESET</button>
   </form>

@@ -1,15 +1,80 @@
-Re create the loan_details table,
+// $sql = "INSERT INTO loan_details (customer_id, customer_name, loan_type, loan_amount, loan_tenure, interest_rate) VALUES (?, ?, ?, ?, ?, ?)";
+// $stmt = mysqli_stmt_init($con);
 
-<?php
-    $i=0;
-    ?>
-    <tr>
-        <td><?php echo $row["loan_id"]; ?></td>
-        <td><?php echo $row["customer_id"]; ?></td>
-        <td><?php echo $row["customer_name"]; ?></td>
-        <td><?php echo $row["loan_type"]; ?></td>
-        <td><?php echo $row["loan_amount"]; ?></td>
-        <td><?php echo $row["loan_tenure"]; ?></td>
-        <td><?php echo $row["interest_rate"]; ?></td>
-    </tr>
-    <?php $i++;?>
+// if(!mysqli_stmt_prepare($stmt, $sql)) {
+  
+//     header("Location: /Loan-Management-system/loan.php?msg=stmterror");
+//     exit();
+//     // replace with header soon.
+// }
+// else {
+//     mysqli_stmt_bind_param($stmt, "isssss", $customer_id, $customer_name, $loan_type, $loan_amount, $loan_tenure, $interest_rate);
+//     mysqli_stmt_execute($stmt);
+//     mysqli_stmt_store_result($stmt);
+
+//     header("Location: /Loan-Management-system/loan/loan.php?msg=success");
+//     exit();
+// }
+// mysqli_stmt_close($stmt);
+// mysqli_close($con);
+
+
+
+
+
+/ check for type of loan
+if ($loan_type === "HOME LOAN") {
+    // check if amount is > then 5L
+    if ($loan_amount >= 500000) {
+        // calculate interest rate.
+        // if loan is more less than 10L and more than great than 5L
+        if ($loan_amount >= 500000 && $loan_amount < 1000000) {
+            echo "SCHEME 1";
+            // check for tenuare and set the interest rate for year.
+            if ($loan_tenure === "24 Months") {
+                echo "Interest = 6.75%";
+                $interest_rate = 6.75;
+            }
+            elseif ($loan_tenure === "60 Months") {
+                echo "Interest = 10.75%";
+                $interest_rate = 10.75;
+            }
+            elseif ($loan_tenure === "84 Months") {
+                echo "Interest = 13.5%";
+                $interest_rate = 13.5;
+            }
+            // else {
+            //     echo "Something wrong.";
+            // }
+            // E calculation
+
+            // (int) $E = (int) $loan_amount * $r * (($x) / ($x - 1)); 
+            // echo "<br>";
+            // setlocale(LC_MONETARY, 'en_IN');
+            // echo money_format('%!.0n', $E);
+            // echo "<br>";
+            // $tot = money_format('%!.0n', round($E * $n));
+            // echo number_format(round($E * $n));
+            // echo $tot;
+
+            // Create a function 
+            $r = $interest_rate / 100 / 12;
+            
+            function EMI($loan_amount, $r, $n) {
+                $x = (float) pow((1+$r), $n);
+                $E = $loan_amount * $r * (($x) / ($x - 1));
+            }
+
+        }
+        elseif ($loan_amount >=1000000 && $loan_amount < 5000000) {
+            echo "SCHEME 2";
+        }
+        elseif ($loan_amount >=5000000) {
+            echo "SCHEME 3";
+        }   
+    }
+    else {
+        echo "Not eligible loan amount should be more than 5L to 2CR";
+        echo '<a href="/Loan-management-system/user_home.php">Home</a>';
+    }
+}
