@@ -1,38 +1,31 @@
 <?php 
 session_start();
-if (!isset($_SESSION['customer_id'])) {
-  header("Location: /Loan-Management-system/Login.php");
-  exit();
+if (empty($_SESSION['emp_id'])) {
+    header("Location: /Loan-Management-system/auth/index.php?AccessDenied");
+    exit();
 }
+
+include ("/var/www/html/access/access_loan.php");
+// //connection
+$con = mysqli_connect($host, $user, $passwd, $db);
+unset($hostname, $username, $passwd, $db);
+
+if(!$con){
+    echo'Connection error'. mysqli_connect_errno();
+}
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loan Details</title>
+    <title>Employee System - Loan Management System</title>
 </head>
 <body>
-    <h1>Loan Detail</h1>
-    <!-- Create Navigation Bar -->
-    <a href="/Loan-Management-system/user_home.php">Home</a>
-    <h4>Customer Information & Loan Details</h4>
+<!-- STYLE -->
 
-    <!-- create sql in such a way that it lists all the loan borrowed by the customer. -->
-    
-
-
-
-
-    <?php
-  session_start();
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<title>Page Title</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 * {
   box-sizing: border-box;
@@ -99,39 +92,16 @@ tr:nth-child(odd) {
     background-color:grey;
 }
 </style>
+
+    <h2>Dashboard</h2>
     <?php
+    if (isset($_SESSION['emp_id'])) {
+        echo "<a href='/Loan-Management-system/auth/logout.php'>Logout</a>";
+    }
+    ?>
 
-  // $con=mysqli_connect('localhost','root','','loan management system');
-  include ("/var/www/html/access/access_loan.php");
-  // //connection
-  $db = "loan_management_system";
-  $con = mysqli_connect($host, $user, $passwd, $db);
-  unset($hostname, $username, $passwd, $db);
-
-      if(!$con){
-          echo'Connection error'. mysqli_connect_errno();
-      }
-
-        $customer_id = $_SESSION['customer_id'];
-
-
-        $sql = "SELECT * FROM loan_details WHERE customer_id=?";
-
-        $stmt = mysqli_stmt_init($con);
-
-      // connection verify
-      if(!mysqli_stmt_prepare($stmt, $sql)) {
-        // checking
-      header("Location: /Loan-Management-system/loan/loan_details.php?error=sqlerrorstmt");
-      }
-      else {
-        mysqli_stmt_bind_param($stmt, "s", $customer_id);
-        mysqli_stmt_execute($stmt);
-
-        $result = mysqli_stmt_get_result($stmt);
-        
-      }
-  ?>
+    <!-- Create a nav bar -->
+    <br>
     <table>
       <tr>
         <td><b>LOAN ID</b></td><br>
@@ -145,6 +115,22 @@ tr:nth-child(odd) {
         <td><b>ACTIONS</b></td>
       </tr>
       <?php
+        $sql = "SELECT * FROM loan_details";
+
+        $stmt = mysqli_stmt_init($con);
+
+        // connection verify
+        if(!mysqli_stmt_prepare($stmt, $sql)) {
+            // checking
+        header("Location: /Loan-Management-system/auth/dashboard.php?error=sqlerrorstmt");
+        }
+        else {
+            mysqli_stmt_bind_param($stmt);
+            mysqli_stmt_execute($stmt);
+
+            $result = mysqli_stmt_get_result($stmt); 
+        }
+
       setlocale(LC_MONETARY, 'en_IN');
         while($row = mysqli_fetch_assoc($result)) {
             echo "<tr>";
@@ -157,9 +143,12 @@ tr:nth-child(odd) {
             echo "<td>" . $row['loan_tenure'] . " Months</td>";
             echo "<td>" . $row['interest_rate'] . "</td>";
             echo "<td>" . $row['loan_status'] . "</td>";
-            echo "<td><a href='/Loan-Management-system/loan/detail_temp.php?loan_id=".$row['loan_id']."'>View</a></td>";
+            echo "<td><a href='/Loan-Management-system/auth/detail_temp.php?loan_id=".$row['loan_id']."&cust_id=".$row['customer_id']."'>View</a></td>";
             echo "</tr>";
         }
+
+
+
         mysqli_stmt_close($stmt);
         mysqli_stmt_free_result($result);
         mysqli_close($con);

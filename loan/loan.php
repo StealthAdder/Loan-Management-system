@@ -19,7 +19,7 @@ if (!isset($_SESSION['customer_id'])) {
     <a href="/Loan-Management-system/user_home.php">Home</a>
   </nav>
 <div class="form-popup" id="myForm">
-  <form action="/Loan-Management-system/loan/test.php" class="form-container"  method="POST">
+  <form action="/Loan-Management-system/loan/loan.inc.create.php" class="form-container"  method="POST">
     <h1> ENTER LOAN DETAILS :</h1>
      <label for="loan type"><b>LOAN TYPE</b></label>
     <select id="loantype" name="loantype">
