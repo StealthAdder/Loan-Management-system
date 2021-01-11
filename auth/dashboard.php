@@ -105,14 +105,15 @@ tr:nth-child(odd) {
     <table>
       <tr>
         <td><b>LOAN ID</b></td><br>
-        <td><b>CUSTOMER_ID</b></td>
+        <td><b>CUST_ID</b></td>
         <td><b>NAME</b></td>
         <td><b>LOAN TYPE</b></td>
         <td><b>LOAN AMOUNT</b></td>
         <td><b>LOAN TENURE</b></td>
         <td><b>INTEREST RATE</b></td>
+        <td><b>EMI AMT.</b></td>
         <td><b>STATUS</b></td>
-        <td><b>ACTIONS</b></td>
+        <td colspan="2"><b>ACTIONS</b></td>
       </tr>
       <?php
         $sql = "SELECT * FROM loan_details";
@@ -133,17 +134,43 @@ tr:nth-child(odd) {
 
       setlocale(LC_MONETARY, 'en_IN');
         while($row = mysqli_fetch_assoc($result)) {
+          // create vars and store them here
+          $interest_rate = $row['interest_rate'];
+          // $loan_tenure = $row['loan_tenure'];
+          $loan_amount = $row['loan_amount'];
+          $n = $row['loan_tenure'];
+
+          // get the emi info!
+            $r = $interest_rate / 100 / 12;
+            (float) $x = (float) pow((1+$r), $n);
+            (int) $E = (int) $loan_amount * $r * (($x) / ($x - 1));
+            $monthly_installment = round($E);
+            $emis_left = $n;
+            $total_loan_amount_paid = "";
+            $total_due_amount = $E * $n;
+
+
             echo "<tr>";
             echo "<td>" . $row['loan_id'] . "</td>";
             echo "<td>" . $row['customer_id'] . "</td>";
+            $loan_id = $row['loan_id'];
+            $customer_id = $row['customer_id'];
             echo "<td>" . $row['customer_name'] . "</td>";
             echo "<td>" . $row['loan_type'] . "</td>";
             // using money_format to put the comma in digits
             echo "<td>₹ " .money_format('%!.0n', $row['loan_amount'])."</td>";
             echo "<td>" . $row['loan_tenure'] . " Months</td>";
             echo "<td>" . $row['interest_rate'] . "</td>";
+            
+            echo "<td>₹" .money_format('%!.0n',$monthly_installment)."</td>";
             echo "<td>" . $row['loan_status'] . "</td>";
-            echo "<td><a href='/Loan-Management-system/auth/detail_temp.php?loan_id=".$row['loan_id']."&cust_id=".$row['customer_id']."'>View</a></td>";
+            if ($row['loan_status'] == "Pending") {
+              echo "<td><a href='test.php?cust_id=".$customer_id."&loan_id=".$loan_id."'>Approve</a></td>";
+              echo "<td><a href='#'>Reject</a></td>";
+            }
+            elseif ($row['loan_status'] == "Approved") {
+              echo "<td><a href='emi_details.php?loan_id=".$loan_id."'>View</a></td>";
+            }
             echo "</tr>";
         }
 
