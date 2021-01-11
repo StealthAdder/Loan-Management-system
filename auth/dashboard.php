@@ -166,10 +166,11 @@ tr:nth-child(odd) {
             echo "<td>" . $row['loan_status'] . "</td>";
             if ($row['loan_status'] == "Pending") {
               echo "<td><a href='test.php?cust_id=".$customer_id."&loan_id=".$loan_id."'>Approve</a></td>";
-              echo "<td><a href='#'>Reject</a></td>";
+              echo "<td><a href='/Loan-Management-system/auth/includes/reject_loan.php?cust_id=".$customer_id."&loan_id=".$loan_id."'>Reject</a></td>";
+              
             }
             elseif ($row['loan_status'] == "Approved") {
-              echo "<td><a href='emi_details.php?loan_id=".$loan_id."'>View</a></td>";
+              echo "<td colspan='2' style='text-align:center;'><a href='emi_details.php?loan_id=".$loan_id."'>View</a></td>";
             }
             echo "</tr>";
         }

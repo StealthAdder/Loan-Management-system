@@ -92,9 +92,9 @@ echo "<td>" . $row['total_loan_amount_paid'] . "</td>";
 echo "<td>" . money_format('%!.0n',$row['total_due_amount']). "</td>";
 echo "</tr>";
         // echo $r;
-        // mysqli_stmt_close($stmt);
-        // mysqli_stmt_free_result($result);
-        // mysqli_close($con);
+        mysqli_stmt_close($stmt);
+        mysqli_stmt_free_result($result);
+        mysqli_close($con);
       ?>
     </table>
 

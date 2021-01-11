@@ -67,6 +67,8 @@ if(!$con){
                     $_SESSION['emp_id'] = $row['emp_id'];
                     $_SESSION['emp_name'] = $row['emp_name'];
                     $_SESSION['emp_desig'] = $row['emp_desig'];
+                    // acs_code while for loan rejection and approval.
+                    $_SESSION['emp_access_code'] = $row['emp_access_code'];
                     header("Location: /Loan-Management-system/auth/dashboard.php?msg=success");
                     exit();
                 }
