@@ -157,15 +157,22 @@ tr:nth-child(odd) {
             echo "<td>" . $row['loan_tenure'] . " Months</td>";
             echo "<td>" . $row['interest_rate'] . "</td>";
             echo "<td>" . $row['loan_status'] . "</td>";
-            echo "<td><a href='/Loan-Management-system/loan/detail_temp.php?loan_id=".$row['loan_id']."'>View</a></td>";
+            
+            // shows view emi details only if they are approved.
+            
+            if ($row['loan_status'] == 'Approved') {
+              echo "<td><a href='/Loan-Management-system/loan/loan_info.php?loan_id=".$row['loan_id']."&cust_id=".$customer_id."'>View</a></td>";
+            }
+            else{
+              echo "<td><a href='#'>Contact</a></td>";
+            }
+            
             echo "</tr>";
         }
         mysqli_stmt_close($stmt);
         mysqli_stmt_free_result($result);
         mysqli_close($con);
       ?>
-      
     </table>
-
 </body>
 </html>

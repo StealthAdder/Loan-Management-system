@@ -5,8 +5,8 @@ include ("/var/www/html/access/access_loan.php");
   // //connection
   $con = mysqli_connect($host, $user, $passwd, $db);
   unset($hostname, $username, $passwd, $db);
-if(mysqli_connect_errno()){
-    echo'Connection error'. mysqli_connect_errno();
+if(!$con){
+  echo'Connection error'. mysqli_connect_errno();
 }
 ?>
 

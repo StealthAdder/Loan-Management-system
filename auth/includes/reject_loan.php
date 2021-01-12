@@ -8,6 +8,9 @@ $loan_id = $_GET['loan_id'];
 // echo $loan_id;
 
 // update the status on loan as rejected.
+
+// Include check for acs_code & authorize rejection.
+
 session_start();
 if (empty($_SESSION['emp_id'])) {
     header("Location: /Loan-Management-system/auth/index.php?AccessDenied");
