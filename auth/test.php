@@ -93,7 +93,7 @@ echo "loan_status " . $row['loan_status'] . "</td>";
 echo "<br>";
 // echo $sql;
 
-$SQL = "INSERT INTO `emi` (loan_id, customer_name, loan_type, loan_amount, no_of_emi, loan_tenure, interest_rate, monthly_installment, emis_left, total_loan_amount_paid, total_due_amount) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+$SQL = "INSERT INTO `emi` (loan_id, customer_id, customer_name, loan_type, loan_amount, no_of_emi, loan_tenure, interest_rate, monthly_installment, emis_left, total_loan_amount_paid, total_due_amount) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 
 
 $stmt = mysqli_stmt_init($con);
@@ -104,7 +104,7 @@ if(!mysqli_stmt_prepare($stmt, $SQL)) {
     // replace with header soon.
 }
 else {
-    mysqli_stmt_bind_param($stmt, "isssssssiss", $loan_id, $customer_name, $loan_type, $loan_amount, $no_of_emi, $n, $interest_rate, $monthly_installment, $emis_left, $total_loan_amount_paid, $total_due_amount);
+    mysqli_stmt_bind_param($stmt, "iisssssssiss", $loan_id, $customer_id, $customer_name, $loan_type, $loan_amount, $no_of_emi, $n, $interest_rate, $monthly_installment, $emis_left, $total_loan_amount_paid, $total_due_amount);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_store_result($stmt);
 

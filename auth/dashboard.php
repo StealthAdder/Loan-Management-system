@@ -116,7 +116,7 @@ tr:nth-child(odd) {
         <td colspan="2"><b>ACTIONS</b></td>
       </tr>
       <?php
-        $sql = "SELECT * FROM loan_details";
+        $sql = "SELECT * FROM loan_details ORDER BY loan_id DESC";
 
         $stmt = mysqli_stmt_init($con);
 

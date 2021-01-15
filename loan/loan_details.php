@@ -115,7 +115,7 @@ tr:nth-child(odd) {
         $customer_id = $_SESSION['customer_id'];
 
 
-        $sql = "SELECT * FROM loan_details WHERE customer_id=?";
+        $sql = "SELECT * FROM loan_details WHERE customer_id=? ORDER BY loan_id DESC";
 
         $stmt = mysqli_stmt_init($con);
 

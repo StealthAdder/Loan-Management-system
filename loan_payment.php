@@ -1,5 +1,26 @@
-<?php
-  session_start();
+<?php 
+session_start();
+if (!isset($_SESSION['customer_id'])) {
+  header("Location: /Loan-Management-system/Login.php");
+  exit();
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Payment & Details</title>
+</head>
+<body>
+    <h1>Loan Payments & Detail</h1>
+    <!-- Create Navigation Bar -->
+    <a href="/Loan-Management-system/user_home.php">Home</a>
+    <h4>Loan Information & Payment.</h4>
+  
+
+    <?php
+  echo $_SESSION['name'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,17 +94,81 @@ tr:nth-child(odd) {
     background-color:grey;
 }
 </style>
-</head>
-<body>
+    <?php
 
-<div class="header">
-  <h1>LOAN MANAGEMENT</h1>
-  <h4>MY ACCOUNT</h4>
-</div>
-<div class="navbar">
-    <center><button onclick="window.location.href='http:user_home.php';" class="backbtn">
-        BACK
-        </button>		</center>
-      </div>
-    </body>
-    <body>
+  // $con=mysqli_connect('localhost','root','','loan management system');
+  include ("/var/www/html/access/access_loan.php");
+  // //connection
+  $con = mysqli_connect($host, $user, $passwd, $db);
+  unset($hostname, $username, $passwd, $db);
+
+if(!$con){
+    echo 'Connection error'. mysqli_connect_errno();
+}
+        $customer_id = $_SESSION['customer_id'];
+
+        $sql = "SELECT * FROM emi WHERE customer_id=? ORDER BY loan_id DESC";
+
+        $stmt = mysqli_stmt_init($con);
+
+      // connection verify
+      if(!mysqli_stmt_prepare($stmt, $sql)) {
+        // checking
+      header("Location: /Loan-Management-system/loan/loan_details.php?error=sqlerrorstmt");
+      }
+      else {
+        mysqli_stmt_bind_param($stmt, "i", $customer_id);
+        mysqli_stmt_execute($stmt);
+
+        $result = mysqli_stmt_get_result($stmt);
+      }
+  ?>
+    <table>
+      <tr>
+        <td><b>LOAN ID</b></td><br>
+        <td><b>Cust Name</b></td>
+        <td><b>LOAN TYPE</b></td>
+        <td><b>LOAN AMOUNT</b></td>
+        <td><b>No. of EMI</b></td>
+        <td><b>LOAN TENURE</b></td>
+        <td><b>INTEREST RATE</b></td>
+        <td><b>EMI</b></td>
+        <td><b>Remaining Paymts.</b></td>
+        <td><b>Repayed Amt.</b></td>
+        <td><b>Due Amt.</b></td>
+        <td><b>Action</b></td>
+      </tr>
+      <?php
+            setlocale(LC_MONETARY, 'en_IN');
+            while($row = mysqli_fetch_assoc($result)) {
+            // customer_id and loan_id exists
+            $loan_amount = $row['loan_amount'];
+            $interest_rate = $row['interest_rate'];
+            // loan_type = n;
+            $n = $row['loan_tenure'];
+            $customer_name = $row['customer_name'];
+            $no_of_emi = $n;
+            echo "<tr>";
+            echo "<td>" . $row['loan_id'] . "</td>";
+            $loan_id = $row['loan_id'];
+            echo "<td>" . $row['customer_name'] . "</td>";
+            echo "<td>" . $row['loan_type'] . "</td>";
+            // using money_format to put the comma in digits
+            echo "<td>₹" .money_format('%!.0n', $loan_amount)."</td>";
+            echo "<td>" . $row['no_of_emi']."</td>";
+            echo "<td>" . $row['loan_tenure']." Months</td>";
+            echo "<td>" . $row['interest_rate']."</td>";
+            echo "<td>₹" .money_format('%!.0n', $row['monthly_installment']). "</td>";
+            echo "<td>" . $row['emis_left'] . "</td>";
+            echo "<td>₹" . $row['total_loan_amount_paid'] . "</td>";
+            echo "<td>₹" . money_format('%!.0n',$row['total_due_amount']). "</td>";
+            echo "<td><a href='/Loan-Management-system/pay_emi.php?loan_id=".$row['loan_id']."&cust_id=".$customer_id."'>Pay</a></td>";
+            echo "</tr>";
+          }  
+        mysqli_stmt_close($stmt);
+        mysqli_stmt_free_result($result);
+        mysqli_close($con);
+      ?>
+    </table>
+</body>
+</html>
