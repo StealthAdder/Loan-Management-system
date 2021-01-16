@@ -154,10 +154,10 @@ if(!$con){
             echo "<td>" . $row['no_of_emi']."</td>";
             echo "<td>" . $row['loan_tenure']." Months</td>";
             echo "<td>" . $row['interest_rate']."</td>";
-            echo "<td>₹" .money_format('%!.0n', $row['monthly_installment']). "</td>";
+            echo "<td>₹" .money_format('%!.2n', $row['monthly_installment']). "</td>";
             echo "<td>" . $row['emis_left'] . "</td>";
-            echo "<td>₹" . $row['total_loan_amount_paid'] . "</td>";
-            echo "<td>₹" . money_format('%!.0n',$row['total_due_amount']). "</td>";
+            echo "<td>₹" .  money_format('%!.2n',$row['total_loan_amount_paid']). "</td>";
+            echo "<td>₹" . money_format('%!.2n',$row['total_due_amount']). "</td>";
             if ($row[total_due_amount] != 0) {
               echo "<td><a href='/Loan-Management-system/loan/payments/pay_emi.php?loan_id=".$row['loan_id']."&cust_id=".$customer_id."'>Pay</a></td>";  
             }else {

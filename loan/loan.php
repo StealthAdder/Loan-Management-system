@@ -38,6 +38,7 @@ if (!isset($_SESSION['customer_id'])) {
      <!-- <input type="months" maxlength = "50" placeholder="Enter loan tenure" name="loantenure" required> -->
      <select id="loantenure" name="loantenure">
       <option value="#" disabled selected>Select</option>
+      <option value="16">16 Months</option>
       <option value="24">24 Months</option>
       <option value="60">60 Months</option>
       <option value="84">84 Months</option>

@@ -45,11 +45,6 @@ $result = mysqli_stmt_get_result($stmt);
 $row = mysqli_fetch_assoc($result);
 }
 
-// mysqli_stmt_close($stmt);
-// mysqli_stmt_free_result($result);
-// mysqli_close($con);
-
-// 
 // customer_id and loan_id exists
 $loan_amount = $row['loan_amount'];
 $interest_rate = $row['interest_rate'];
@@ -63,13 +58,15 @@ $no_of_emi = $n;
 $loan_type = $row['loan_type'];
 $r = $interest_rate / 100 / 12;
 (float) $x = (float) pow((1+$r), $n);
-(int) $E = (int) $loan_amount * $r * (($x) / ($x - 1));
+(float) $E = (int) $loan_amount * $r * (($x) / ($x - 1));
 setlocale(LC_MONETARY, 'en_IN');
 // $EMI = money_format('%!.0n', $E);
-$monthly_installment = round($E);
+
+// check with undo round,
+$monthly_installment = number_format((float)$E, 2, '.', '');
 $emis_left = $n;
 $total_loan_amount_paid = "0";
-$total_due_amount = round($E * $n);
+$total_due_amount = number_format((float) $monthly_installment * $no_of_emi, 2, '.', '') ;
 
 
 echo "<br>";

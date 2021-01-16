@@ -146,7 +146,7 @@ tr:nth-child(odd) {
         
         echo "<td>" . $row['customer_name'] . "</td>";
         // using money_format to put the comma in digits
-        echo "<td>₹ " .money_format('%!.0n', $row['emi_payed_amount'])."</td>";
+        echo "<td>₹ " .money_format('%!.2n', $row['emi_payed_amount'])."</td>";
         echo "<td>" . $row['paymt_date'] . "</td>";
         echo "<td><a href='/Loan-Management-system/auth/home/paymt_apr.php?cust_id=".$customer_id."&loan_id=".$loan_id."&recp_id=".$receipt_no."'>Received</a></td>";
         echo "<td><a href='/Loan-Management-system/auth/home/paymt_rejc.php?cust_id=".$customer_id."&loan_id=".$loan_id."'>Not Received</a></td>";

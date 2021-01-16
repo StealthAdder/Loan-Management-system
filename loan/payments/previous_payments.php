@@ -61,7 +61,7 @@ $customer_id = $_SESSION['customer_id'];
             echo "<td>" .$row['customer_id']."</td>";
             echo "<td>" .$row['customer_name']."</td>";
             // using money_format to put the comma in digits
-            echo "<td>₹ ".money_format('%!.0n', $row['emi_payed_amount'])."</td>";
+            echo "<td>₹ ".money_format('%!.2n', $row['emi_payed_amount'])."</td>";
             echo "<td>" .$row['paymt_date']."</td>";
             echo "<td>" .$row['paymt_status'] . "</td>";
             // shows view emi details only if they are approved.

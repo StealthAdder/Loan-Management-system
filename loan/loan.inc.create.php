@@ -33,34 +33,6 @@ echo $loan_amount;
 echo "<br>";
 echo $n;
 echo "<br>";
-// echo $interest_rate;
-
-// set interest based off the type of loan.
-
-// function EMI($loan_amount, $interest_rate, $n) {
-            
-//     $r = $interest_rate / 100 / 12;
-//     echo "interest r = ".$r;
-//     echo "<br>";
-//     (float) $x = (float) pow((1+$r), $n);
-//     echo "x = ".$x;
-//     echo "<br>";
-//     (int) $E = (int) $loan_amount * $r * (($x) / ($x - 1));
-//     echo "E = ".$E;
-//     echo "<br>";
-//     setlocale(LC_MONETARY, 'en_IN');
-//     $EMI = money_format('%!.0n', $E);
-//     echo "EMI: ".$EMI;
-//     echo "<br>";
-//     // total repayable amount.
-
-//     $PAYABLE = money_format('%!.0n', round($E * $n));
-//     echo "PAYABLE: ".$PAYABLE;
-//     echo "<br>";
-//     $INT_AMT = round($E * $n) - $loan_amount;
-//     echo "Paid Interest = ".$INT_AMT;
-//     echo "<br>";
-// }
 
 if ($loan_type === "HOME LOAN") {
     // set interest

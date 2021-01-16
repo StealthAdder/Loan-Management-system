@@ -34,9 +34,8 @@ setlocale(LC_MONETARY, 'en_IN');
 $row = mysqli_fetch_assoc($result);
 
 // init vars related to emi and loan_payment table.
-$emi_payed_amt = $row['monthly_installment'];
+$emi_payed_amt = number_format((float) $row['monthly_installment'], 2, '.', '');
 $customer_name = $row['customer_name'];
-
 
 echo "<br>";
 echo "emi ".$emi_payed_amt;
@@ -61,7 +60,7 @@ if(!mysqli_stmt_prepare($stmt, $SQL)) {
     // replace with header soon.
 }
 else {
-    mysqli_stmt_bind_param($stmt, "iisis", $loan_id, $customer_id, $customer_name, $emi_payed_amt, $date);
+    mysqli_stmt_bind_param($stmt, "iisss", $loan_id, $customer_id, $customer_name, $emi_payed_amt, $date);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_store_result($stmt);
     header("Location: /Loan-Management-system/loan/payments/previous_payments.php?msg=success");

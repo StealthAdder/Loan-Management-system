@@ -149,10 +149,10 @@ tr:nth-child(odd) {
             $r = $interest_rate / 100 / 12;
             (float) $x = (float) pow((1+$r), $n);
             (int) $E = (int) $loan_amount * $r * (($x) / ($x - 1));
-            $monthly_installment = round($E);
+            $monthly_installment = number_format((float)$E, 2, '.', '');
             $emis_left = $n;
             $total_loan_amount_paid = "";
-            $total_due_amount = $E * $n;
+            $total_due_amount = number_format((float) $monthly_installment * $no_of_emi, 2, '.', '');
 
 
             echo "<tr>";
@@ -163,11 +163,11 @@ tr:nth-child(odd) {
             echo "<td>" . $row['customer_name'] . "</td>";
             echo "<td>" . $row['loan_type'] . "</td>";
             // using money_format to put the comma in digits
-            echo "<td>₹ " .money_format('%!.0n', $row['loan_amount'])."</td>";
+            echo "<td>₹ " .money_format('%!.2n', $row['loan_amount'])."</td>";
             echo "<td>" . $row['loan_tenure'] . " Months</td>";
             echo "<td>" . $row['interest_rate'] . "</td>";
             
-            echo "<td>₹" .money_format('%!.0n',$monthly_installment)."</td>";
+            echo "<td>₹" .money_format('%!.2n',$monthly_installment)."</td>";
             echo "<td>" . $row['loan_status'] . "</td>";
             if ($row['loan_status'] == "Pending") {
               echo "<td><a href='/Loan-Management-system/auth/test.php?cust_id=".$customer_id."&loan_id=".$loan_id."'>Approve</a></td>";
