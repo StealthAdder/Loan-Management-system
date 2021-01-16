@@ -201,7 +201,7 @@ body {
   </div> 
   
   <a href="http:emi.php">EMI</a>
-  <a href="http:loan_payment.php">LOAN PAYMENT</a>
+  <a href="/Loan-Management-system/loan/payments/loan_payment.php">LOAN PAYMENT</a>
   <!-- create session -->
   <?php
     if(isset($_SESSION['usrname'])) {

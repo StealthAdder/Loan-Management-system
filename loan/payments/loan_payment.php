@@ -15,13 +15,9 @@ if (!isset($_SESSION['customer_id'])) {
 <body>
     <h1>Loan Payments & Detail</h1>
     <!-- Create Navigation Bar -->
-    <a href="/Loan-Management-system/user_home.php">Home</a>
+    <a href="/Loan-Management-system/index.php">Home</a>
     <h4>Loan Information & Payment.</h4>
-  
-
-    <?php
-  echo $_SESSION['name'];
-?>
+    <a href="/Loan-Management-system/loan/payments/previous_payments.php">Previous Payments</a>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -162,7 +158,7 @@ if(!$con){
             echo "<td>" . $row['emis_left'] . "</td>";
             echo "<td>₹" . $row['total_loan_amount_paid'] . "</td>";
             echo "<td>₹" . money_format('%!.0n',$row['total_due_amount']). "</td>";
-            echo "<td><a href='/Loan-Management-system/pay_emi.php?loan_id=".$row['loan_id']."&cust_id=".$customer_id."'>Pay</a></td>";
+            echo "<td><a href='/Loan-Management-system/loan/payments/pay_emi.php?loan_id=".$row['loan_id']."&cust_id=".$customer_id."'>Pay</a></td>";
             echo "</tr>";
           }  
         mysqli_stmt_close($stmt);

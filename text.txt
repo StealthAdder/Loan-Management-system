@@ -75,6 +75,6 @@ if ($loan_type === "HOME LOAN") {
     }
     else {
         echo "Not eligible loan amount should be more than 5L to 2CR";
-        echo '<a href="/Loan-management-system/user_home.php">Home</a>';
+        echo '<a href="/Loan-management-system/index.php">Home</a>';
     }
 }

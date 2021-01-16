@@ -16,7 +16,7 @@ if (!isset($_SESSION['customer_id'])) {
 <body>
 <!-- create navigation here. -->
   <nav>
-    <a href="/Loan-Management-system/user_home.php">Home</a>
+    <a href="/Loan-Management-system/index.php">Home</a>
   </nav>
 <div class="form-popup" id="myForm">
   <form action="/Loan-Management-system/loan/loan.inc.create.php" class="form-container"  method="POST">

@@ -112,7 +112,7 @@
       // connection verify
       if(!mysqli_stmt_prepare($stmt, $sql)) {
         // checking
-      header("Location: ../user_home.php?error=sqlerrorstmt");
+      header("Location: ../index.php?error=sqlerrorstmt");
       }
       else {
         mysqli_stmt_bind_param($stmt, "s", $customer_id);

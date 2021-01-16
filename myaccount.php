@@ -81,7 +81,7 @@ tr:nth-child(odd) {
   <h4>MY ACCOUNT</h4>
 </div>
 <div class="navbar">
-    <center><button onclick="window.location.href='http:user_home.php';" class="backbtn">
+    <center><button onclick="window.location.href='http:index.php';" class="backbtn">
         BACK
         </button></center>
       </div>
@@ -109,7 +109,7 @@ tr:nth-child(odd) {
       // connection verify
       if(!mysqli_stmt_prepare($stmt, $sql)) {
         // checking
-      header("Location: ./user_home.php?error=sqlerrorstmt");
+      header("Location: ./index.php?error=sqlerrorstmt");
       }
       else {
         mysqli_stmt_bind_param($stmt, "s", $usrname);

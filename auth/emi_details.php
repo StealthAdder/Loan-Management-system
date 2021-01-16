@@ -65,9 +65,8 @@ $row = mysqli_fetch_assoc($result);
         <td><b>Repayed Amt.</b></td>
         <td><b>Due Amt.</b></td>
       </tr>
-      <?php
-      setlocale(LC_MONETARY, 'en_IN');
-
+<?php
+setlocale(LC_MONETARY, 'en_IN');
             
 // customer_id and loan_id exists
 $loan_amount = $row['loan_amount'];

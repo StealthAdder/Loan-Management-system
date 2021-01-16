@@ -58,7 +58,7 @@ if(isset($_POST['login'])) {
       $_SESSION['name'] = $row['name'];
       $_SESSION['customer_id'] = $row['customer_id'];
 
-      header("Location: ../user_home.php?login=success");
+      header("Location: ../index.php?login=success");
     }
     else {
       // echo "wrong password";

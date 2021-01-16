@@ -15,7 +15,7 @@ if (!isset($_SESSION['customer_id'])) {
 <body>
     <h1>Loan Detail</h1>
     <!-- Create Navigation Bar -->
-    <a href="/Loan-Management-system/user_home.php">Home</a>
+    <a href="/Loan-Management-system/index.php">Home</a>
     <h4>Customer Information & Loan Details</h4>
 
     <!-- create sql in such a way that it lists all the loan borrowed by the customer. -->

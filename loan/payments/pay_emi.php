@@ -25,11 +25,11 @@ $loan_id = $_GET['loan_id'];
 </head>
 <body>
     <h2>Payment Page</h2>
-    <form action="#" method="POST">
+    <form action="/Loan-Management-system/loan/payments/receipt.php" method="POST">
         <label for="">Loan ID: </label>
-        <input type="text" disabled value=<?php echo $loan_id?> name="loan_id">
+        <input type="text" value="<?php echo $loan_id?>" readonly name="loan_id">
         <label for="">Customer ID: </label>
-        <input type="text" disabled value=<?php echo $customer_id?> name="customer_id">
+        <input type="text" value="<?php echo $customer_id?>" name="customer_id" readonly>
         <br>
         <br>
         <input type="text" name="card_no" placeholder="CARD NO.">

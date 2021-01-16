@@ -6,7 +6,7 @@
     <title>test</title>
 </head>
 <body>
-    <a href="../user_home.php">HOME</a>
+    <a href="../index.php">HOME</a>
 </body>
 </html>
 
@@ -172,7 +172,7 @@ if(isset($_POST['submit']))
         }
         else {
             echo "Not eligible loan amount should be more than 5L to 2CR";
-            echo '<a href="../user_home.php">Home</a>';
+            echo '<a href="../index.php">Home</a>';
         }
     }
 

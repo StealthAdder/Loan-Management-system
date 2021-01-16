@@ -82,7 +82,7 @@
 
                 <center><button type="submit" class="submitbtn">SUBMIT</button>
                     <br>
-                <button onclick="window.location.href='user_home.php';" class="backbtn">
+                <button onclick="window.location.href='index.php';" class="backbtn">
                 BACK
                 </button>
             </center>
