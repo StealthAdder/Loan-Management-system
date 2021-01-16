@@ -97,11 +97,16 @@ tr:nth-child(odd) {
     <?php
     if (isset($_SESSION['emp_id'])) {
         echo "<a href='/Loan-Management-system/auth/logout.php'>Logout</a>";
-    }
+        echo "<br>";
+        echo "<br>";
+        echo "<br>";
+        echo '<a href="/Loan-Management-system/auth/home/index.php">Back</a>';
+      }
+
     ?>
 
     <!-- Create a nav bar -->
-    <br>
+    <h3>Loans for Approval & Rejection</h3>
     <table>
       <tr>
         <td><b>LOAN ID</b></td><br>
@@ -123,7 +128,7 @@ tr:nth-child(odd) {
         // connection verify
         if(!mysqli_stmt_prepare($stmt, $sql)) {
             // checking
-        header("Location: /Loan-Management-system/auth/dashboard.php?error=sqlerrorstmt");
+        header("Location: /Loan-Management-system/auth/home/all_loans.php?error=sqlerrorstmt");
         }
         else {
             mysqli_stmt_bind_param($stmt);
@@ -165,7 +170,7 @@ tr:nth-child(odd) {
             echo "<td>₹" .money_format('%!.0n',$monthly_installment)."</td>";
             echo "<td>" . $row['loan_status'] . "</td>";
             if ($row['loan_status'] == "Pending") {
-              echo "<td><a href='test.php?cust_id=".$customer_id."&loan_id=".$loan_id."'>Approve</a></td>";
+              echo "<td><a href='/Loan-Management-system/auth/test.php?cust_id=".$customer_id."&loan_id=".$loan_id."'>Approve</a></td>";
               echo "<td><a href='/Loan-Management-system/auth/includes/reject_loan.php?cust_id=".$customer_id."&loan_id=".$loan_id."'>Reject</a></td>";
               
             }

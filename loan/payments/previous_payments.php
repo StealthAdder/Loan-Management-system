@@ -26,7 +26,7 @@ $customer_id = $_SESSION['customer_id'];
         echo'Connection error'. mysqli_connect_errno();
     }
     
-    $sql = "SELECT * FROM loan_payment WHERE customer_id=?";
+    $sql = "SELECT * FROM loan_payment WHERE customer_id=? ORDER BY receipt_no DESC";
 
     $stmt = mysqli_stmt_init($con);
 

@@ -99,7 +99,7 @@ $SQL = "INSERT INTO `emi` (loan_id, customer_id, customer_name, loan_type, loan_
 $stmt = mysqli_stmt_init($con);
 if(!mysqli_stmt_prepare($stmt, $SQL)) {
 
-    header("Location: /Loan-Management-system/auth/dashboard.php?msg=stmterror");
+    header("Location: /Loan-Management-system/auth/home/all_loans.php?msg=stmterror");
     exit();
     // replace with header soon.
 }
@@ -113,7 +113,7 @@ else {
     $stmt = mysqli_stmt_init($con);
     if(!mysqli_stmt_prepare($stmt, $SQL2)) {
 
-        header("Location: /Loan-Management-system/auth/dashboard.php?msg=stmterror1");
+        header("Location: /Loan-Management-system/auth/home/all_loans.php?msg=stmterror1");
         exit();
         // replace with header soon.
     }
@@ -122,7 +122,7 @@ else {
         mysqli_stmt_bind_param($stmt, "sii", $loan_approved, $loan_id, $customer_id);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_store_result($stmt);
-        header("Location: /Loan-Management-system/auth/dashboard.php?msg=success");
+        header("Location: /Loan-Management-system/auth/home/all_loans.php?msg=success");
     exit();
     }
 }

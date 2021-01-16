@@ -158,7 +158,11 @@ if(!$con){
             echo "<td>" . $row['emis_left'] . "</td>";
             echo "<td>₹" . $row['total_loan_amount_paid'] . "</td>";
             echo "<td>₹" . money_format('%!.0n',$row['total_due_amount']). "</td>";
-            echo "<td><a href='/Loan-Management-system/loan/payments/pay_emi.php?loan_id=".$row['loan_id']."&cust_id=".$customer_id."'>Pay</a></td>";
+            if ($row[total_due_amount] != 0) {
+              echo "<td><a href='/Loan-Management-system/loan/payments/pay_emi.php?loan_id=".$row['loan_id']."&cust_id=".$customer_id."'>Pay</a></td>";  
+            }else {
+              echo "<td>Loan Cleared!</td>";
+            }
             echo "</tr>";
           }  
         mysqli_stmt_close($stmt);

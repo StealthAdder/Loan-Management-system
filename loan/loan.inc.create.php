@@ -64,16 +64,16 @@ echo "<br>";
 
 if ($loan_type === "HOME LOAN") {
     // set interest
-    $interest_rate = 6.80;
+    $interest_rate = 7;
 
 }
 elseif ($loan_type === "PERSONAL LOAN") {
     // set interest
-    $interest_rate = 10.75;
+    $interest_rate = 11;
 
 }
 elseif ($loan_type === "VEHICLE LOAN") {
-    $interest_rate = 7.70;
+    $interest_rate = 9;
 }
 
 

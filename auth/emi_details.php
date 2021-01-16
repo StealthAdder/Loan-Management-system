@@ -48,7 +48,7 @@ $row = mysqli_fetch_assoc($result);
   <br>
     EMI & Details about Loan No:<?php echo $loan_id; ?>
     <br>
-    <a href="/Loan-Management-system/auth/dashboard.php">Back</a>
+    <a href="/Loan-Management-system/auth/home/all_loans.php">Back</a>
 
 
     <table>

@@ -33,7 +33,7 @@ $sql = "UPDATE loan_details SET loan_status=? WHERE loan_id=? AND customer_id=?"
 $stmt = mysqli_stmt_init($con);
 if(!mysqli_stmt_prepare($stmt, $sql)) {
 
-    header("Location: /Loan-Management-system/auth/dashboard.php?msg=stmterror_reject_loan");
+    header("Location: /Loan-Management-system/auth/home/all_loans.php?msg=stmterror_reject_loan");
     exit();
     // replace with header soon.
 }
@@ -43,7 +43,7 @@ else {
     mysqli_stmt_execute($stmt);
     mysqli_stmt_store_result($stmt);
     // close them
-    header("Location: /Loan-Management-system/auth/dashboard.php?loan_rejection=success");
+    header("Location: /Loan-Management-system/auth/home/all_loans.php?loan_rejection=success");
 exit();
 
 mysqli_stmt_close($stmt);
