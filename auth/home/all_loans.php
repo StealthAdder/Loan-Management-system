@@ -5,12 +5,7 @@ if (empty($_SESSION['emp_id'])) {
     header("Location: /Loan-Management-system/auth/index.php?AccessDenied");
     exit();
 }
-// $con=mysqli_connect('localhost','root','','loan_management_system');
-include ("/var/www/html/access/access_loan.php");
-// //connection
-$con = mysqli_connect($host, $user, $passwd, $db);
-unset($hostname, $username, $passwd, $db);
-
+$con=mysqli_connect('localhost','root','','loan_management_system');
 if(!$con){
     echo'Connection error'. mysqli_connect_errno();
 }

@@ -90,12 +90,8 @@ tr:nth-child(odd) {
     background-color:grey;
 }
 </style>
-    <?php
-  // $con=mysqli_connect('localhost','root','','loan_management_system');
-  include ("/var/www/html/access/access_loan.php");
-  // //connection
-  $con = mysqli_connect($host, $user, $passwd, $db);
-  unset($hostname, $username, $passwd, $db);
+<?php
+$con=mysqli_connect('localhost','root','','loan_management_system');
 
 if(!$con){
     echo 'Connection error'. mysqli_connect_errno();
