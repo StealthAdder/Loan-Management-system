@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `loan management system`
+-- Database: `loan_management_system`
 --
 
 -- --------------------------------------------------------
@@ -55,17 +55,20 @@ INSERT INTO `customer` (`name`, `customer_id`, `username`, `pswd`, `phno`, `dob`
 --
 
 CREATE TABLE `emi` (
-  `loan id` int(11) NOT NULL,
-  `name` varchar(30) NOT NULL,
-  `loan_type` varchar(30) NOT NULL,
-  `loan_amount` int(10) NOT NULL,
-  `no_of_emi's` int(10) NOT NULL,
-  `loan_tenure` varchar(10) NOT NULL,
-  `interest_rate` int(10) NOT NULL,
-  `monthly_installment` int(10) NOT NULL,
-  `no_of_emi's_remaining` int(10) NOT NULL,
-  `total_loan_amount_paid` int(10) NOT NULL,
-  `total_due_amount` int(10) NOT NULL
+  `loan_id` INT(15) NOT NULL PRIMARY KEY,
+  `customer_id` INT(30) NOT NULL,
+  `customer_name` VARCHAR(30) NOT NULL,
+  `loan_type` VARCHAR(30) NOT NULL,
+  `loan_amount` VARCHAR(30) NOT NULL,
+  `no_of_emi` VARCHAR(20) NOT NULL,
+  `loan_tenure` VARCHAR(30) NOT NULL,
+  `interest_rate` VARCHAR(20) NOT NULL,
+  `monthly_installment` VARCHAR(30) NOT NULL,
+  `emis_left` INT(20) NOT NULL,
+  `total_loan_amount_paid` VARCHAR(30) NOT NULL,
+  `total_due_amount` VARCHAR(30) NOT NULL,
+  -- check if you get error on emi table just add backticks.
+  FOREIGN KEY (loan_id) REFERENCES `loan_details`(loan_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -74,16 +77,17 @@ CREATE TABLE `emi` (
 -- Table structure for table `loan payment`
 --
 
-CREATE TABLE `loan payment` (
-  `name` int(20) NOT NULL,
-  `emi_no` int(20) NOT NULL,
-  `receipt_no` int(10) NOT NULL,
-  `loan_id` int(10) NOT NULL,
-  `amount` int(10) NOT NULL,
-  `total_loan_amount_paid` int(10) NOT NULL,
-  `total_due_amount` int(10) NOT NULL,
-  `date` date NOT NULL
+CREATE TABLE `loan_payment` (
+  `receipt_no` int(10) NOT NULL PRIMARY KEY,
+  `loan_id` INT(30) NOT NULL,
+  `customer_id` INT(30) NOT NULL,
+  `customer_name` VARCHAR(30) NOT NULL,
+  `emi_payed_amount` VARCHAR(30) NOT NULL,
+  `paymt_date` VARCHAR(30) NOT NULL,
+  `paymt_status` VARCHAR(30) NOT NULL DEFAULT 'Processing',
+  FOREIGN KEY (loan_id) REFERENCES `emi`(loan_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 
 -- --------------------------------------------------------
 
@@ -98,27 +102,22 @@ CREATE TABLE `loan_details` (
   `loan_type` VARCHAR(30) NOT NULL,
   `loan_amount` VARCHAR(30) NOT NULL,
   `loan_tenure` VARCHAR(30) NOT NULL,
-  `interest_rate` VARCHAR(10) NOT NULL
+  `interest_rate` VARCHAR(10) NOT NULL,
+  `loan_status` VARCHAR(30) NOT NULL DEFAULT 'Pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `loan_details`
---
 
--- INSERT INTO `loan_details` (`customer_id`, `customer_name`, `loan_type`, `loan_amount`, `loan_tenure`, `interest_rate`) VALUES 
--- (3, 'kop', 1234, 'dsdfdd', '12344', '12', '10'),
--- (8, 'awadhesh', 1235, 'sasasajkjk', '123434', '12', '10');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `login`
---
-
-CREATE TABLE `login` (
-  `username` varchar(20) NOT NULL,
-  `password` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- Bank Employee table
+CREATE TABLE employees (
+  `emp_id` INT(20) NOT NULL PRIMARY KEY,
+  `emp_name` TINYTEXT NOT NULL,
+  `emp_username` TINYTEXT NOT NULL,
+  `emp_desig` TINYTEXT NOT NULL,
+  `emp_dob` TINYTEXT NOT NULL,
+  `emp_phno` TINYTEXT NOT NULL,
+  `emp_access_code` TINYTEXT NOT NULL,
+  `emp_passwd` TINYTEXT NOT NULL
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -146,54 +145,41 @@ ALTER TABLE `customer`
   ADD UNIQUE KEY `username` (`username`);
 
 --
--- Indexes for table `emi`
---
-ALTER TABLE `emi`
-  ADD PRIMARY KEY (`loan id`);
-
---
 -- Indexes for table `loan payment`
 --
-ALTER TABLE `loan payment`
-  ADD PRIMARY KEY (`loan_id`);
+SET @@auto_increment_increment=4;
+
+ALTER TABLE `loan_payment`
+MODIFY `receipt_no` INT(30) AUTO_INCREMENT,
+AUTO_INCREMENT=8050;
 
 --
 -- Indexes for table `loan_details`
 --
-ALTER TABLE `loan_details`
-  ADD PRIMARY KEY (`loan_id`),
-  ADD UNIQUE KEY `customer_id` (`customer_id`);
 
---
--- AUTO_INCREMENT for dumped tables
---
+ALTER TABLE `loan_details`
+MODIFY `loan_id` INT(30) AUTO_INCREMENT,
+AUTO_INCREMENT=13524;
 
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `customer_id` int(30) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1244;
+MODIFY `customer_id` int(30) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1244;
 
---
--- AUTO_INCREMENT for table `emi`
---
-ALTER TABLE `emi`
-  MODIFY `loan id` int(11) NOT NULL AUTO_INCREMENT;
 
---
--- AUTO_INCREMENT for table `loan_details`
---
-ALTER TABLE `loan_details`
-MODIFY `loan_id` INT(30) AUTO_INCREMENT, AUTO_INCREMENT=13524;
---
--- Constraints for dumped tables
---
+-- 
+-- AUTO_INCREMENT for table `employee table`
+SET @@auto_increment_increment=2;
+ALTER TABLE `employees`
+MODIFY `emp_id` INT(20) AUTO_INCREMENT,
+AUTO_INCREMENT=3000;
 
---
+
 -- Constraints for table `loan_details`
 --
 ALTER TABLE `loan_details`
-  ADD CONSTRAINT `loan_details_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `loan_details_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

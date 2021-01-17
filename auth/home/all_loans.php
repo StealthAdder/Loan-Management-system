@@ -1,10 +1,11 @@
-<?php 
+<?php
+
 session_start();
 if (empty($_SESSION['emp_id'])) {
     header("Location: /Loan-Management-system/auth/index.php?AccessDenied");
     exit();
 }
-
+// $con=mysqli_connect('localhost','root','','loan_management_system');
 include ("/var/www/html/access/access_loan.php");
 // //connection
 $con = mysqli_connect($host, $user, $passwd, $db);
@@ -102,7 +103,6 @@ tr:nth-child(odd) {
         echo "<br>";
         echo '<a href="/Loan-Management-system/auth/home/index.php">Back</a>';
       }
-
     ?>
 
     <!-- Create a nav bar -->
@@ -175,18 +175,14 @@ tr:nth-child(odd) {
               
             }
             elseif ($row['loan_status'] == "Approved") {
-              echo "<td colspan='2' style='text-align:center;'><a href='emi_details.php?loan_id=".$loan_id."'>View</a></td>";
+              echo "<td colspan='2' style='text-align:center;'><a href='/Loan-Management-system/auth/emi_details.php?loan_id=".$loan_id."'>View</a></td>";
             }
             echo "</tr>";
         }
-
-
-
         mysqli_stmt_close($stmt);
         mysqli_stmt_free_result($result);
         mysqli_close($con);
       ?>
-      
     </table>
 
 </body>

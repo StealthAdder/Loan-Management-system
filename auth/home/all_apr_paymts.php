@@ -1,5 +1,5 @@
+<!-- Show all the apr payments here -->
 <?php
-
 session_start();
 if (empty($_SESSION['emp_id'])) {
     header("Location: /Loan-Management-system/auth/index.php?AccessDenied");
@@ -14,14 +14,13 @@ unset($hostname, $username, $passwd, $db);
 if(!$con){
     echo'Connection error'. mysqli_connect_errno();
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>History of Payments</title>
+    <title>History of All approved Payments</title>
 </head>
 <body>
 
@@ -93,8 +92,7 @@ tr:nth-child(odd) {
     background-color:grey;
 }
 </style>
-
-    <?php
+<?php
     if (isset($_SESSION['emp_id'])) {
         echo "<a href='/Loan-Management-system/auth/logout.php'>Logout</a>";
         echo "<br>";
@@ -103,9 +101,7 @@ tr:nth-child(odd) {
         echo '<a href="/Loan-Management-system/auth/home/index.php">Back</a>';
     }
       ?>
-    <h2>Payment Approval Site.</h2>
-
-    <h3>Loans for Approval & Rejection</h3>
+    <h2>History of Payments Approved</h2>
 <table>
     <tr>
     <td><b>Receipt No.</b></td><br>
@@ -118,7 +114,7 @@ tr:nth-child(odd) {
     <td colspan=2><b>Paymt. Status Upd.</b></td>
     </tr>
     <?php
-    $sql = "SELECT * FROM loan_payment WHERE paymt_status='Processing' ORDER BY receipt_no DESC";
+    $sql = "SELECT * FROM loan_payment ORDER BY receipt_no DESC";
 
     $stmt = mysqli_stmt_init($con);
     
@@ -148,8 +144,7 @@ tr:nth-child(odd) {
         // using money_format to put the comma in digits
         echo "<td>₹ " .money_format('%!.2n', $row['emi_payed_amount'])."</td>";
         echo "<td>" . $row['paymt_date'] . "</td>";
-        echo "<td><a href='/Loan-Management-system/auth/home/paymt_apr.php?cust_id=".$customer_id."&loan_id=".$loan_id."&recp_id=".$receipt_no."'>Received</a></td>";
-        echo "<td><a href='/Loan-Management-system/auth/home/paymt_rejc.php?cust_id=".$customer_id."&loan_id=".$loan_id."'>Not Received</a></td>";
+        echo "<td>" . $row['paymt_status'] . "</td>";
         echo "</tr>";
     }
     mysqli_stmt_close($stmt);

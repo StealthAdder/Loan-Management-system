@@ -91,8 +91,7 @@ tr:nth-child(odd) {
 }
 </style>
     <?php
-
-  // $con=mysqli_connect('localhost','root','','loan management system');
+  // $con=mysqli_connect('localhost','root','','loan_management_system');
   include ("/var/www/html/access/access_loan.php");
   // //connection
   $con = mysqli_connect($host, $user, $passwd, $db);
@@ -158,10 +157,32 @@ if(!$con){
             echo "<td>" . $row['emis_left'] . "</td>";
             echo "<td>₹" .  money_format('%!.2n',$row['total_loan_amount_paid']). "</td>";
             echo "<td>₹" . money_format('%!.2n',$row['total_due_amount']). "</td>";
-            if ($row[total_due_amount] != 0) {
-              echo "<td><a href='/Loan-Management-system/loan/payments/pay_emi.php?loan_id=".$row['loan_id']."&cust_id=".$customer_id."'>Pay</a></td>";  
-            }else {
-              echo "<td>Loan Cleared!</td>";
+            
+            // SQL query to check loan_payment for existing processing payments and hold payment until they are approved or rejected.
+            $SQL = "SELECT * FROM loan_payment WHERE customer_id=? AND loan_id=? ORDER BY receipt_no DESC";
+              
+            $stmt = mysqli_stmt_init($con);
+
+            if(!mysqli_stmt_prepare($stmt, $SQL)) {
+              // checking
+            header("Location: /Loan-Management-system/loan/loan_details.php?error=sqlerrorstmt");
+            }
+            else {
+              mysqli_stmt_bind_param($stmt, "ii", $customer_id, $loan_id);
+              mysqli_stmt_execute($stmt);
+      
+              $res = mysqli_stmt_get_result($stmt);
+              $rw = mysqli_fetch_assoc($res);
+            }
+            if ($rw['paymt_status'] == 'Processing') {
+              echo "<td>Paymt, Pending.</td>";
+            }
+            else{
+              if ($row[total_due_amount] != 0) {
+                echo "<td><a href='/Loan-Management-system/loan/payments/pay_emi.php?loan_id=".$row['loan_id']."&cust_id=".$customer_id."'>Pay</a></td>";  
+              }else {
+                echo "<td>Loan Cleared!</td>";
+              }
             }
             echo "</tr>";
           }  

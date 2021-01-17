@@ -89,7 +89,7 @@ tr:nth-child(odd) {
     <body>
     <?php
 
-  // $con=mysqli_connect('localhost','root','','loan management system');
+  // $con=mysqli_connect('localhost','root','','loan_management_system');
   include ("/var/www/html/access/access_loan.php");
   // //connection
   $db = "loan_management_system";

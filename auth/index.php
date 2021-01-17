@@ -1,5 +1,6 @@
 <!-- LOGIN SYSTEM -->
 <?php
+// $con=mysqli_connect('localhost','root','','loan_management_system');
 include ("/var/www/html/access/access_loan.php");
 // //connection
 $con = mysqli_connect($host, $user, $passwd, $db);

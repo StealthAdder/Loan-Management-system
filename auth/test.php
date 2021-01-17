@@ -5,7 +5,7 @@ if (isset($_POST['approve'])) {
     exit();
 }
 else {
-
+// $con=mysqli_connect('localhost','root','','loan_management_system');
 // connection
 include ("/var/www/html/access/access_loan.php");
 // //connection
